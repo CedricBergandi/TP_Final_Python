@@ -1,0 +1,33 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">LISTADO DE TÍTULOS DEL CLUB ATLÉTICO RIVER PLATE</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>LISTADO DE TÍTULOS</h2>
+<ul>
+
+    {% for titulo in object_list %}
+    <li>
+        
+        {{ titulo }}
+
+       
+    </li>
+    <a class="btn btn-danger" href="{% url 'titulo_borrar' titulo.id %}">Borrar</a>
+    <a class="btn btn-success" href="{% url 'titulo_editar' titulo.id %}">Editar</a>
+    
+    {% endfor %}
+    <br>
+    <br>
+    <a class="btn btn-primary" href="{% url 'titulo_crear'  %}">Agregar título</a>
+    
+
+
+</ul>
+<h3>{{ mensaje }}</h3>
+
+{% endblock %}

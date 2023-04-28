@@ -1,0 +1,33 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">PLANTEL DE FÚTBOL PROFESIONAL DEL CLUB ATLÉTICO RIVER PLATE</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>PLANTEL FÚTBOL PROFESIONAL</h2>
+<ul>
+
+    {% for profesional in object_list %}
+    <li>
+        
+        {{ profesional }}
+
+       
+    </li>
+    <a class="btn btn-danger" href="{% url 'profesional_borrar' profesional.id %}">Borrar</a>
+    <a class="btn btn-success" href="{% url 'profesional_editar' profesional.id %}">Editar</a>
+    
+    {% endfor %}
+    <br>
+    <br>
+    <a class="btn btn-primary" href="{% url 'profesional_crear'  %}">Agregar jugador del fútbol profesional</a>
+    
+
+
+</ul>
+<h3>{{ mensaje }}</h3>
+
+{% endblock %}

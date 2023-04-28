@@ -1,0 +1,28 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Resultados de la busqueda de autoridades</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+{% if cursos %}
+
+<h2>LISTADO DE AUTORIDADES</h2>
+{% for autoridad in autoridades %}
+
+<h3>{{ autoridad.nombre }} - {{ autoridad.apellido }} - {{ autoridad.puesto }}</h3>
+
+{% endfor %}
+
+{% else %}
+
+<h2>NO HAY AUTORIDADES</h2>
+
+{% endif %}
+
+
+
+{% endblock %}
