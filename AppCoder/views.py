@@ -14,8 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
    
 def profesionales(request):
-    
-    return render(request, "AppCoder/profesionales.html")
+    avatar= obtenerAvatar(request)
+    return render(request, "AppCoder/profesionales.html",{"avatar":avatar})
 
 
 @login_required
@@ -37,7 +37,7 @@ def autoridades(request):
 
     autoridades = Autoridades.objects.all()
 
-    avatar= Avatar.objects.filter(user=request.user.id)[0].imagen.url
+    avatar= obtenerAvatar(request)
     
     return render(request, "AppCoder/autoridades.html", {"autoridades": autoridades, "form" : form, "avatar":avatar})
 
@@ -102,7 +102,8 @@ def editarAutoridad(request, id):
 
 @login_required
 def titulos(request):
-    return render(request, "AppCoder/titulos.html")
+    avatar= obtenerAvatar(request)
+    return render(request, "AppCoder/titulos.html",{"avatar":avatar})
 
 def inicio(request):
     return HttpResponse("Bienvenido a la pagina principal del Club Atlético River Plate")
@@ -120,7 +121,7 @@ class AutoridadesList(LoginRequiredMixin, ListView):
 class AutoridadesCreacion(LoginRequiredMixin, CreateView):
     model= Autoridades
     success_url= reverse_lazy("autoridades_list")
-    fields=['nombre', 'apellido', 'email', 'puesto', 'fecha de designacion']
+    fields=['nombre', 'apellido', 'email', 'puesto', 'fecha_designacion']
 
 class AutoridadesDetalle(LoginRequiredMixin, DetailView):
     model=Autoridades
@@ -133,7 +134,7 @@ class AutoridadesDelete(LoginRequiredMixin, DeleteView):
 class AutoridadesUpdate(LoginRequiredMixin, UpdateView):
     model = Autoridades
     success_url = reverse_lazy('autoridades_list')
-    fields=['nombre', 'apellido', 'email', 'puesto', 'fecha de designacion']
+    fields=['nombre', 'apellido', 'email', 'puesto', 'fecha_designacion']
 
 class ProfesionalesList(LoginRequiredMixin, ListView):
     model= Profesional
@@ -141,7 +142,7 @@ class ProfesionalesList(LoginRequiredMixin, ListView):
 
 class ProfesionalesCreacion(LoginRequiredMixin, CreateView):
     model= Profesional
-    success_url= reverse_lazy("profesionales_list")
+    success_url= reverse_lazy("profesional_list")
     fields=['nombre', 'apellido', 'email', 'edad', 'puesto']
 
 class ProfesionalesDetalle(LoginRequiredMixin, DetailView):
@@ -150,12 +151,34 @@ class ProfesionalesDetalle(LoginRequiredMixin, DetailView):
 
 class ProfesionalesDelete(LoginRequiredMixin, DeleteView):
     model=Profesional
-    success_url= reverse_lazy("profesionales_list")
+    success_url= reverse_lazy("profesional_list")
 
 class ProfesionalesUpdate(LoginRequiredMixin, UpdateView):
     model = Profesional
-    success_url = reverse_lazy('profesionales_list')
-    fields=['nombre', 'apellido', 'email', 'edad', 'puesto']
+    success_url = reverse_lazy('profesional_list')
+    fields=['titulo', 'ano_obtencion']
+
+class TitulosList(LoginRequiredMixin, ListView):
+    model= Titulos
+    template_name= "AppCoder/titulos.html"
+
+class TitulosCreacion(LoginRequiredMixin, CreateView):
+    model= Titulos
+    success_url= reverse_lazy("titulos_list")
+    fields=['titulo', 'ano_obtencion']
+
+class TitulosDetalle(LoginRequiredMixin, DetailView):
+    model=Titulos
+    template_name="Appcoder/titulos_detalle.html"
+
+class TitulosDelete(LoginRequiredMixin, DeleteView):
+    model=Titulos
+    success_url= reverse_lazy("titulos_list")
+
+class TitulosUpdate(LoginRequiredMixin, UpdateView):
+    model = Titulos
+    success_url = reverse_lazy('titulos_list')
+    fields=['titulo', 'ano_obtencion']
 
 
 def login_request(request):

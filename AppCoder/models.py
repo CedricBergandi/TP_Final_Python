@@ -8,37 +8,22 @@ class Autoridades(models.Model):
     email= models.EmailField()
     fecha_designacion=models.DateField()   
     def __str__(self):
-        return f"{self.nombre} - {self.apellido}"    
+        return f"{self.nombre} {self.apellido}. Designado el {self.fecha_designacion}"    
 
 class Profesional(models.Model):
     nombre=models.CharField(max_length=50)
     apellido=models.CharField(max_length=50)
     email= models.EmailField()
-    edad=models.IntegerField()   
+    edad=models.IntegerField()
+    puesto=models.CharField(max_length=50)   
     def __str__(self):
-        return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Edad: {self.edad}"
-
-class Reserva(models.Model):
-    nombre=models.CharField(max_length=50)
-    apellido=models.CharField(max_length=50)
-    email= models.EmailField()
-    edad=models.IntegerField()   
-    def __str__(self):
-        return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Edad: {self.edad}"
-
-class Femenino(models.Model):
-    nombre=models.CharField(max_length=50)
-    apellido=models.CharField(max_length=50)
-    email= models.EmailField()
-    edad=models.IntegerField()   
-    def __str__(self):
-        return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Edad: {self.edad}"
+        return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Edad: {self.edad} - Puesto: {self.puesto}"
 
 class Titulos(models.Model):
     titulo=models.CharField(max_length=50)
     ano_obtencion=models.IntegerField()   
     def __str__(self):
-        return f"Título: {self.nombre} - Año obtención: {self.ano_obtencion}"
+        return f"Título: {self.titulo} - Año obtención: {self.ano_obtencion}"
 
 
 class Avatar(models.Model):

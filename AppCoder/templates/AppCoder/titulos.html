@@ -17,13 +17,13 @@
 
        
     </li>
-    <a class="btn btn-danger" href="{% url 'titulo_borrar' titulo.id %}">Borrar</a>
-    <a class="btn btn-success" href="{% url 'titulo_editar' titulo.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'titulos_borrar' titulo.id %}">Borrar</a>
+    <a class="btn btn-success" href="{% url 'titulos_editar' titulo.id %}">Editar</a>
     
     {% endfor %}
     <br>
     <br>
-    <a class="btn btn-primary" href="{% url 'titulo_crear'  %}">Agregar título</a>
+    <a class="btn btn-primary" href="{% url 'titulos_crear'  %}">Agregar título</a>
     
 
 

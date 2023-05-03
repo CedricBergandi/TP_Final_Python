@@ -1,0 +1,22 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">DATOS DE AUTORIDAD</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+
+
+<p>NOMBRE : <i>{{profesional.nombre}}</i></p>
+<p>APELLIDO : <i>{{profesional.apellido}}</i></p>
+<p>EMAIL : <i>{{profesional.email}}</i></p>
+<p>EDAD : <i>{{profesional.edad}}</i></p>
+<p>PUESTO : <i>{{profesional.puesto}}</i></p>
+
+
+
+
+{% endblock %}
