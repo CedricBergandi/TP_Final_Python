@@ -12,4 +12,11 @@
 <h1> Inicio</h1>
 <h2>{{ mensaje }}</h2>
 
+<form method="get" action="{% url 'buscar' %}">
+    {% csrf_token %}
+    <input type="text" name="ano_obtencion">
+    <button type="submit">Buscar</button>
+</form>
+
+
 {% endblock %}

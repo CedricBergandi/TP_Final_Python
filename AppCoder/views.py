@@ -59,12 +59,11 @@ def obtenerAvatar(request):
 @login_required
 def buscar(request):
     
-    titulo= request.GET["ano_obtencion"]
+    ano_obtencion= request.GET["ano_obtencion"]
     if ano_obtencion!="":
-        titulos= Titulo.objects.filter(comision__icontains=ano_obtencion)
+        titulos= Titulos.objects.filter(ano_obtencion__icontains=ano_obtencion)
         return render(request, "AppCoder/resultadosBusqueda.html", {"titulos": titulos})
-    else:
-        return render(request, "AppCoder/busquedaTitulos.html", {"mensaje": "Ingrese un año y vea los títulos obtenidos en el mismo", "avatar":obtenerAvatar(request)})
+    return render(request, "AppCoder/busquedaTitulos.html", {"mensaje": "Aún no hay títulos en la base de datos", "avatar":obtenerAvatar(request)})
 
 @login_required
 def eliminarAutoridad(request, id):

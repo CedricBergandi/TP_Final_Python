@@ -3,23 +3,23 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">Resultados de la busqueda de autoridades</h1>
+<h1 class="mb-5">Resultados de la busqueda de titulos</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
 
-{% if cursos %}
+{% if titulos %}
 
-<h2>LISTADO DE AUTORIDADES</h2>
-{% for autoridad in autoridades %}
+<h2>LISTADO DE TÍTULOS</h2>
+{% for titulo in titulo %}
 
-<h3>{{ autoridad.nombre }} - {{ autoridad.apellido }} - {{ autoridad.puesto }}</h3>
+<h3>{{ titulos.titulo }} - {{ titulos.ano_obtencion }}</h3>
 
 {% endfor %}
 
 {% else %}
 
-<h2>NO HAY AUTORIDADES</h2>
+<h2>NO HAY TITULOS</h2>
 
 {% endif %}
 
