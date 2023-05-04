@@ -40,7 +40,11 @@ urlpatterns = [
     path("register/", register, name="register"),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
-    path('agregarAvatar/', agregarAvatar, name='agregarAvatar')
+    path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
+
+    path('autoridadMensaje/<pk>/mensaje/', MensajePagina.as_view(), name='mensaje'),
+
+    path('acercaDeMi/', acercaDeMi, name='acercaDeMi')
     
     
 ]

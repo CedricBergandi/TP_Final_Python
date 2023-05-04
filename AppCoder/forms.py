@@ -2,6 +2,7 @@ from django import forms
 
 from django.contrib.auth.forms import  UserCreationForm
 from django.contrib.auth.models import User
+from .models import Mensaje
 
 class AutoridadesForm(forms.Form):
     nombre=forms.CharField(max_length=50)
@@ -47,3 +48,12 @@ class UserEditForm(UserCreationForm):
 
 class AvatarForm(forms.Form):
     imagen=forms.ImageField(label="Imagen")
+
+class FormularioMensaje(forms.ModelForm):
+    class Meta:
+        model = Mensaje
+        fields = ('nombre', 'mensaje')
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'mensaje' : forms.Textarea(attrs={'class': 'form-control'}),
+        }

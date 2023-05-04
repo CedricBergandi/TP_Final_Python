@@ -29,4 +29,16 @@ class Titulos(models.Model):
 class Avatar(models.Model):
     imagen= models.ImageField(upload_to="avatars")
     user=models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Mensaje(models.Model):
+    comentario = models.ForeignKey(Autoridades, related_name='comentarios', on_delete=models.CASCADE, null=True)
+    nombre = models.CharField(max_length=50)
+    mensaje = models.TextField(null=True, blank=True)
+    fechaComentario = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-fechaComentario']
+
+    def __str__(self):
+        return '%s - %s' % (self.nombre, self.comentario)
     

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Autoridades, Profesional, Titulos, Avatar
-from .forms import AutoridadesForm, RegistroUsuarioForm, UserEditForm, AvatarForm
+from .models import Autoridades, Profesional, Titulos, Avatar, Mensaje
+from .forms import AutoridadesForm, RegistroUsuarioForm, UserEditForm, AvatarForm, FormularioMensaje
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -59,7 +59,7 @@ def obtenerAvatar(request):
 @login_required
 def buscar(request):
     
-    ano_obtencion= request.GET["ano_obtencion"]
+    ano_obtencion= int(request.GET["ano_obtencion"])
     if ano_obtencion!="":
         titulos= Titulos.objects.filter(ano_obtencion__icontains=ano_obtencion)
         return render(request, "AppCoder/resultadosBusqueda.html", {"titulos": titulos})
@@ -256,3 +256,17 @@ def agregarAvatar(request):
     else:
         form=AvatarForm()
         return render(request, "AppCoder/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":obtenerAvatar(request)})
+
+def acercaDeMi(request):
+    avatar= obtenerAvatar(request)
+    return render(request, 'AppCoder/acercaDeMi.html', {"avatar":avatar})
+
+class MensajePagina(LoginRequiredMixin, CreateView):
+    model = Mensaje
+    form_class = FormularioMensaje
+    template_name = 'AppCoder/mensajeria.html'
+    success_url = reverse_lazy('padre')
+
+    def form_valid(self, form):
+        form.instance.mensajeria_id = self.kwargs['pk']
+        return super(Mensaje, self).form_valid(form)

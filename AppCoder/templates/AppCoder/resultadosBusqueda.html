@@ -11,9 +11,9 @@
 {% if titulos %}
 
 <h2>LISTADO DE TÍTULOS</h2>
-{% for titulo in titulo %}
+{% for titulo in titulos %}
 
-<h3>{{ titulos.titulo }} - {{ titulos.ano_obtencion }}</h3>
+<h3>{{ titulo.titulo }} - {{ titulo.ano_obtencion }}</h3>
 
 {% endfor %}
 

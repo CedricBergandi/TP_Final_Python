@@ -10,13 +10,14 @@
 {% block contenido_que_cambia %}
 
 <h1> Inicio</h1>
-<h2>{{ mensaje }}</h2>
+<h3>
+    Escriba un año y vea todos los títulos obtenidos en el mismo. 
+</h3>
 
 <form method="get" action="{% url 'buscar' %}">
     {% csrf_token %}
     <input type="text" name="ano_obtencion">
     <button type="submit">Buscar</button>
 </form>
-
 
 {% endblock %}

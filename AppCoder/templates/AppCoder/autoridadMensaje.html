@@ -1,0 +1,26 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+    <h4>Mensajes:</h4>
+    <br>
+    <div class="container">
+    {% if not autoridad.comentarios.all %}
+        Sin comentarios
+    {% else %}
+        {% for mensaje in inicio.mensajes.all %}
+        <p><strong>{{mensaje.nombre}}</strong></p>
+        <p>{{mensaje.mensaje}}</p>
+        <p><small>{{mensaje.fechaMensaje}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'autoridadMensaje' autoridad.pk %}">Agrega un comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}

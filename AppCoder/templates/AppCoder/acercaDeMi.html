@@ -1,0 +1,17 @@
+{% extends 'AppCoder/padre.html' %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> ACERCA DE MI </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<br>
+<div style="overflow: auto;">
+    <img src="{% static 'AppCoder/assets/img/Presentacion.jpeg' %}" alt="Yo" style="float: left; margin-right: 10px; width: 300px; height: 400px;">
+    <h10 style="margin-top: 0px;">
+        Mi nombre es Cedric Bergandi, tengo 27 años y vivo en Córdoba, Argentina. <br><br> Actualmente trabajo en MercadoLibre en el negocio de SuperMarket con enfoque en análisis de los costos de la operación. Previamente también trabaje en Arcor (como Analista de Sociedades y como Analista de Planificación y Control de Gestión Agropecuaria) y Dayco (como Analista Financiero Senior). <br><br> Me fascina todo lo referido al análisis de datos para entender el pasado de un negocio y buscar palancas para potenciar su productividad. <br><br> ¡Seguime en LinkedIn!: https://www.linkedin.com/in/cedric-bergandi/ <br><br>
+    </h10>
+</div>
+
+{% endblock %}
