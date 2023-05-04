@@ -22,6 +22,7 @@ urlpatterns = [
     path('autoridades/<pk>', AutoridadesDetalle.as_view(), name='autoridades_detalle'),
     path('autoridades/editar/<pk>', AutoridadesUpdate.as_view(), name='autoridades_editar'),
     path('autoridades/borrar/<pk>', AutoridadesDelete.as_view(), name='autoridades_borrar'),
+    path('autoridades/comentario/<pk>/', MensajePagina.as_view(), name='comentario_autoridades'),
 
     path("profesionales/list/", ProfesionalesList.as_view(), name="profesional_list"),
     path('profesionales/nuevo/', ProfesionalesCreacion.as_view(), name='profesional_crear'),
@@ -42,7 +43,7 @@ urlpatterns = [
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
 
-    path('autoridadMensaje/<pk>/mensaje/', MensajePagina.as_view(), name='mensaje'),
+
 
     path('acercaDeMi/', acercaDeMi, name='acercaDeMi')
     

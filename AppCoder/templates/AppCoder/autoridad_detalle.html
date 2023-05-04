@@ -17,6 +17,21 @@
 <p>FECHA DE DESIGNACIÓN : <i>{{autoridad.fecha_designacion}}</i></p>
 
 
-
+<div class="container">
+    <h4>Comentarios:</h4>
+    <br>
+    {% if not autoridad.comentarios.all %}
+        Sin comentarios
+    {% else %}
+        {% for mensaje in autoridad.comentarios.all %}
+        <p><strong>{{mensaje.nombre}}</strong></p>
+        <p>{{mensaje.mensaje}}</p>
+        <p><small>{{mensaje.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'agregar_comentario' autoridad.pk %}">Agrega un comentario</a>
+</div>
+<br>
 
 {% endblock %}
