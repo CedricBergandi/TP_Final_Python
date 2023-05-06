@@ -9,7 +9,7 @@ El presente trabajo consiste en un sitio web de River Plate, en el que se puede 
 #### Autoridades
 En está sección se pueden ingresar nuevos datos de autoridades, como así también visualizar los existentes, con detalle de su nombre, apellido, puesto y fecha de designación. 
 
-#### Proveedores
+#### Plantel de Fútbol Profesional
 En está sección se pueden ingresar nuevos datos de los jugadores de fútbol y cuerpo técnico que integran el plantel profesional, como así también visualizar los existentes, con detalle de su nombre, apellido, edad y puesto.
 
 #### Títulos
