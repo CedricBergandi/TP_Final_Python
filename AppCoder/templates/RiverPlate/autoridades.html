@@ -1,0 +1,44 @@
+{% extends "RiverPlate/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Autoridades de River Plate</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>AUTORIDADES</h2>
+<ul>
+
+    <br>
+    <a class="btn btn-primary" href="{% url 'autoridades_crear'  %}">Agregar autoridad</a>
+    <br><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Puesto</th>
+            <th scope="col">Fecha designación</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for autoridad in autoridades %}
+          <tr>
+            <th scope="row">{{ autoridad.nombre }}</th>
+            <td>{{ autoridad.apellido }}</td>
+            <td>{{ autoridad.puesto }}</td>
+            <td>{{ autoridad.fecha_designacion }}</td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'autoridades_borrar' autoridad.id %}">Borrar</a>
+                <a class="btn btn-success" href="{% url 'autoridades_editar' autoridad.id %}">Editar</a>
+            </td>
+          </tr>
+    
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+{% endblock %}

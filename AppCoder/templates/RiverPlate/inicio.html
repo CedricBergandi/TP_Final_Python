@@ -1,0 +1,51 @@
+{% extends "RiverPlate/padre.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+    <h1>¡Bienvenido a la web de River Plate!</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<h1> Inicio</h1>
+<h3>
+    Escriba un año y vea todos los títulos obtenidos en el mismo. 
+</h3>
+
+<form method="get" action="{% url 'buscar' %}">
+    {% csrf_token %}
+    <input type="text" name="ano_obtencion">
+    <button type="submit">Buscar</button>
+</form>
+<br><br><br>
+<h3>
+  Forma parte de nuestra comunidad! Escribí un comentario alentando al millo! 
+</h3>
+<a href="{% url 'nuevo_comentario' %}">Agregar Comentario</a>
+<br><br>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Autor</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Mensaje</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for comentario in comentarios %}
+      <tr>
+        <th scope="row">{{ comentario.autor }}</th>
+        <td>{{ comentario.fecha_creacion }}</td>
+        <td>{{ comentario.contenido }}</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+{% endblock %}

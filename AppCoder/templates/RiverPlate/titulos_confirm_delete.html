@@ -1,0 +1,18 @@
+{% extends "RiverPlate/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">FORMULARIO DE TITULOS</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h1>FORMULARIO DE TITULOS</h1>
+
+<form method="post">{% csrf_token %}
+    ¿Estas seguro que deseas borrar el título "{{ object }}"?
+    <input type="submit" value="SI">
+    <input type="button" value="NO" onclick="location.href='{% url 'titulos' %}';">
+
+</form>
+{% endblock %}
