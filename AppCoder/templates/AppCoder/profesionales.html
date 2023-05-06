@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">PLANTEL DE FÚTBOL PROFESIONAL DEL CLUB ATLÉTICO RIVER PLATE</h1>
+<h1 class="mb-5">Plantel de Fútbol Profesional del CLUB ATLÉTICO RIVER PLATE</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
@@ -19,15 +19,37 @@
     </li>
     <a class="btn btn-danger" href="{% url 'profesional_borrar' profesional.id %}">Borrar</a>
     <a class="btn btn-success" href="{% url 'profesional_editar' profesional.id %}">Editar</a>
-    
+    <br>
     {% endfor %}
     <br>
     <br>
     <a class="btn btn-primary" href="{% url 'profesional_crear'  %}">Agregar jugador del fútbol profesional</a>
+    <br><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Puesto</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for prof in profesionales %}
+          <tr>
+            <th scope="row">{{ prof.nombre }}</th>
+            <td>{{ prof.apellido }}</td>
+            <td>{{ prof.edad }}</td>
+            <td>{{ prof.puesto }}</td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'profesional_borrar' prof.id %}">Borrar</a>
+                <a class="btn btn-success" href="{% url 'profesional_editar' prof.id %}">Editar</a>
+            </td>
+          </tr>
     
-
-
-</ul>
-<h3>{{ mensaje }}</h3>
+          {% endfor %}
+        </tbody>
+      </table>
 
 {% endblock %}

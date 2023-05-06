@@ -3,31 +3,37 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">LISTADO DE TÍTULOS DEL CLUB ATLÉTICO RIVER PLATE</h1>
+<h1 class="mb-5">Listado de Títulos del CLUB ATLÉTICO RIVER PLATE</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
 <h2>LISTADO DE TÍTULOS</h2>
 <ul>
 
-    {% for titulo in object_list %}
-    <li>
-        
-        {{ titulo }}
-
-       
-    </li>
-    <a class="btn btn-danger" href="{% url 'titulos_borrar' titulo.id %}">Borrar</a>
-    <a class="btn btn-success" href="{% url 'titulos_editar' titulo.id %}">Editar</a>
-    
-    {% endfor %}
-    <br>
     <br>
     <a class="btn btn-primary" href="{% url 'titulos_crear'  %}">Agregar título</a>
+    <br><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Año Obtención</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for titulo in titulos %}
+          <tr>
+            <th scope="row">{{ titulo.titulo }}</th>
+            <td>{{ titulo.ano_obtencion }}</td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'titulos_borrar' titulo.id %}">Borrar</a>
+                <a class="btn btn-success" href="{% url 'titulos_editar' titulo.id %}">Editar</a>
+            </td>
+          </tr>
     
-
-
-</ul>
-<h3>{{ mensaje }}</h3>
+          {% endfor %}
+        </tbody>
+      </table>
 
 {% endblock %}

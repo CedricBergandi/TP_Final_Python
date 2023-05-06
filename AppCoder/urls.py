@@ -17,20 +17,16 @@ urlpatterns = [
     path("eliminarAutoridad/<id>", eliminarAutoridad, name="eliminarAutoridad"),
     path("editarAutoridad/<id>", editarAutoridad, name="editarAutoridad"),
 
-    path("autoridades/list/", AutoridadesList.as_view(), name="autoridades_list"),
     path('autoridades/nuevo/', AutoridadesCreacion.as_view(), name='autoridades_crear'),
     path('autoridades/<pk>', AutoridadesDetalle.as_view(), name='autoridades_detalle'),
     path('autoridades/editar/<pk>', AutoridadesUpdate.as_view(), name='autoridades_editar'),
     path('autoridades/borrar/<pk>', AutoridadesDelete.as_view(), name='autoridades_borrar'),
-    path('autoridades/comentario/<pk>/', MensajePagina.as_view(), name='comentario_autoridades'),
 
-    path("profesionales/list/", ProfesionalesList.as_view(), name="profesional_list"),
     path('profesionales/nuevo/', ProfesionalesCreacion.as_view(), name='profesional_crear'),
     path('profesionales/<pk>', ProfesionalesDetalle.as_view(), name='profesional_detalle'),
     path('profesionales/editar/<pk>', ProfesionalesUpdate.as_view(), name='profesional_editar'),
     path('profesionales/borrar/<pk>', ProfesionalesDelete.as_view(), name='profesional_borrar'),
 
-    path("titulos/list/", TitulosList.as_view(), name="titulos_list"),
     path('titulos/nuevo/', TitulosCreacion.as_view(), name='titulos_crear'),
     path('titulos/<pk>', TitulosDetalle.as_view(), name='titulos_detalle'),
     path('titulos/editar/<pk>', TitulosUpdate.as_view(), name='titulos_editar'),
@@ -44,8 +40,9 @@ urlpatterns = [
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
 
 
+    path('acercaDeMi/', acercaDeMi, name='acercaDeMi'),
 
-    path('acercaDeMi/', acercaDeMi, name='acercaDeMi')
+    path('comentarios/', nuevo_comentario, name='nuevo_comentario')
     
     
 ]

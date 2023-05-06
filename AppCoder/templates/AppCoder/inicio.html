@@ -19,5 +19,32 @@
     <input type="text" name="ano_obtencion">
     <button type="submit">Buscar</button>
 </form>
+<br><br><br>
+<a href="{% url 'nuevo_comentario' %}">Agregar Comentario</a>
+<br><br>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Mensaje</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for comentario in comentarios %}
+      <tr>
+        <th scope="row">{{ comentario.id }}</th>
+        <td>{{ comentario.autor }}</td>
+        <td>{{ comentario.fecha_creacion }}</td>
+        <td>{{ comentario.contenido }}</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+
 
 {% endblock %}

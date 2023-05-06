@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Autoridades, Profesional, Titulos, Avatar, Mensaje
-from .forms import AutoridadesForm, RegistroUsuarioForm, UserEditForm, AvatarForm, FormularioMensaje
+from .models import Autoridades, Profesional, Titulos, Avatar, Comentario
+from .forms import AutoridadesForm, RegistroUsuarioForm, UserEditForm, AvatarForm, ComentarioForm
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -12,10 +12,13 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.shortcuts import render, redirect, get_object_or_404
+
    
 def profesionales(request):
     avatar= obtenerAvatar(request)
-    return render(request, "AppCoder/profesionales.html",{"avatar":avatar})
+    profesionales = Profesional.objects.all().order_by('apellido')
+    return render(request, "AppCoder/profesionales.html",{"profesionales": profesionales, "avatar":avatar})
 
 
 @login_required
@@ -102,24 +105,21 @@ def editarAutoridad(request, id):
 @login_required
 def titulos(request):
     avatar= obtenerAvatar(request)
-    return render(request, "AppCoder/titulos.html",{"avatar":avatar})
+    titulos = Titulos.objects.all().order_by('-ano_obtencion')
+    return render(request, "AppCoder/titulos.html",{"titulos":titulos,"avatar":avatar})
 
 def inicio(request):
     return HttpResponse("Bienvenido a la pagina principal del Club Atlético River Plate")
 
 
 def inicioApp(request):
+    comentarios = Comentario.objects.all()
+    return render(request, "AppCoder/inicio.html", {"avatar":obtenerAvatar(request), "comentarios":comentarios})
 
-    return render(request, "AppCoder/inicio.html", {"avatar":obtenerAvatar(request)})
-
-
-class AutoridadesList(LoginRequiredMixin, ListView):
-    model= Autoridades
-    template_name= "AppCoder/autoridades.html"
 
 class AutoridadesCreacion(LoginRequiredMixin, CreateView):
     model= Autoridades
-    success_url= reverse_lazy("autoridades_list")
+    success_url= reverse_lazy("autoridades") #autoridades_list
     fields=['nombre', 'apellido', 'email', 'puesto', 'fecha_designacion']
 
 class AutoridadesDetalle(LoginRequiredMixin, DetailView):
@@ -128,20 +128,16 @@ class AutoridadesDetalle(LoginRequiredMixin, DetailView):
 
 class AutoridadesDelete(LoginRequiredMixin, DeleteView):
     model=Autoridades
-    success_url= reverse_lazy("autoridades_list")
+    success_url= reverse_lazy("autoridades")
 
 class AutoridadesUpdate(LoginRequiredMixin, UpdateView):
     model = Autoridades
-    success_url = reverse_lazy('autoridades_list')
+    success_url = reverse_lazy('autoridades')
     fields=['nombre', 'apellido', 'email', 'puesto', 'fecha_designacion']
-
-class ProfesionalesList(LoginRequiredMixin, ListView):
-    model= Profesional
-    template_name= "AppCoder/profesionales.html"
 
 class ProfesionalesCreacion(LoginRequiredMixin, CreateView):
     model= Profesional
-    success_url= reverse_lazy("profesional_list")
+    success_url= reverse_lazy("profesionales")
     fields=['nombre', 'apellido', 'email', 'edad', 'puesto']
 
 class ProfesionalesDetalle(LoginRequiredMixin, DetailView):
@@ -150,20 +146,16 @@ class ProfesionalesDetalle(LoginRequiredMixin, DetailView):
 
 class ProfesionalesDelete(LoginRequiredMixin, DeleteView):
     model=Profesional
-    success_url= reverse_lazy("profesional_list")
+    success_url= reverse_lazy("profesionales")
 
 class ProfesionalesUpdate(LoginRequiredMixin, UpdateView):
     model = Profesional
-    success_url = reverse_lazy('profesional_list')
-    fields=['titulo', 'ano_obtencion']
-
-class TitulosList(LoginRequiredMixin, ListView):
-    model= Titulos
-    template_name= "AppCoder/titulos.html"
+    success_url = reverse_lazy('profesionales')
+    fields=['nombre', 'apellido', 'email', 'edad', 'puesto']
 
 class TitulosCreacion(LoginRequiredMixin, CreateView):
     model= Titulos
-    success_url= reverse_lazy("titulos_list")
+    success_url= reverse_lazy("titulos")
     fields=['titulo', 'ano_obtencion']
 
 class TitulosDetalle(LoginRequiredMixin, DetailView):
@@ -172,11 +164,11 @@ class TitulosDetalle(LoginRequiredMixin, DetailView):
 
 class TitulosDelete(LoginRequiredMixin, DeleteView):
     model=Titulos
-    success_url= reverse_lazy("titulos_list")
+    success_url= reverse_lazy("titulos")
 
 class TitulosUpdate(LoginRequiredMixin, UpdateView):
     model = Titulos
-    success_url = reverse_lazy('titulos_list')
+    success_url = reverse_lazy('titulos')
     fields=['titulo', 'ano_obtencion']
 
 
@@ -261,12 +253,16 @@ def acercaDeMi(request):
     avatar= obtenerAvatar(request)
     return render(request, 'AppCoder/acercaDeMi.html', {"avatar":avatar})
 
-class MensajePagina(LoginRequiredMixin, CreateView):
-    model = Mensaje
-    form_class = FormularioMensaje
-    template_name = 'AppCoder/mensajeria.html'
-    success_url = reverse_lazy('padre')
 
-    def form_valid(self, form):
-        form.instance.mensajeria_id = self.kwargs['pk']
-        return super(Mensaje, self).form_valid(form)
+@login_required
+def nuevo_comentario(request):
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.autor = request.user
+            comentario.save()
+            return redirect('inicioApp')
+    else:
+        form = ComentarioForm()
+    return render(request, 'AppCoder/nuevo_comentario.html', {'form': form})

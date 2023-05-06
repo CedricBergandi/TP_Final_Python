@@ -10,7 +10,7 @@
 <h1>FORMULARIO DE TITULOS</h1>
 
 <form method="post">{% csrf_token %}
-    estas seguro que deseas borrar el título "{{ object }}"?
+    ¿Estas seguro que deseas borrar el título "{{ object }}"?
     <input type="submit" value="SI">
     <input type="button" value="NO" onclick="location.href='{% url 'titulos' %}';">
 
